@@ -28,4 +28,11 @@ public abstract class BaseEntity {
     @Column(nullable = false)
     private LocalDateTime modifiedOn;
 
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
+    public LocalDateTime getCreatedOn() { return createdOn; }
+    public void setCreatedOn(LocalDateTime createdOn) { this.createdOn = createdOn; }
+    public LocalDateTime getModifiedOn() { return modifiedOn; }
+    public void setModifiedOn(LocalDateTime modifiedOn) { this.modifiedOn = modifiedOn; }
+
 }

@@ -7,18 +7,30 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="evt_notification_service" />
         <module name="evt_grpc_contracts" />
         <module name="evtbff" />
         <module name="eventopenservice" />
         <module name="eventcoreservice" />
       </profile>
+      <profile name="Annotation profile for evently" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="demo" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="evt_notification_service" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demo" options="-parameters" />
       <module name="eventcoreservice" options="-parameters" />
-      <module name="evently" options="" />
+      <module name="evently" options="-parameters" />
       <module name="eventopenservice" options="-parameters" />
       <module name="evt_grpc_contracts" options="-parameters" />
       <module name="evt_notification_service" options="-parameters" />

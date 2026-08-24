@@ -4,7 +4,6 @@
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/eventcoreservice" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/eventopenservice" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/evt_notification_service" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/evtbff" isTestSource="false" />
     </content>
   </component>

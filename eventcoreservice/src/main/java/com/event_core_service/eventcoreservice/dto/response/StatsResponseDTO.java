@@ -20,5 +20,9 @@ import java.util.Map;
 
         private Map<EventCategory, Long> byCategory;
 
+        public long getTotalEvents() { return totalEvents; }
+        public Map<EventStatus, Long> getByStatus() { return byStatus; }
+        public Map<EventCategory, Long> getByCategory() { return byCategory; }
+
 
     }

@@ -1,3 +1,10 @@
 spring:
   application:
     name: evtbff
+
+
+  cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled=true:

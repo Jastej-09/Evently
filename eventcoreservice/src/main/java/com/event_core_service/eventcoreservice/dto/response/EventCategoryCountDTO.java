@@ -13,4 +13,7 @@ import lombok.Setter;
 public class EventCategoryCountDTO {
     private EventCategory eventcategory;
     private Long count;
+
+    public EventCategory getEventcategory() { return eventcategory; }
+    public Long getCount() { return count; }
 }

@@ -13,9 +13,9 @@ public class ResponseMapper {
         response.setCategory(event.getCategory());
         response.setStatus(event.getStatus());
         response.setCity(event.getCity());
-        response.setCreatedOn(event.getCreatedOn());
-        response.setModifiedOn(event.getModifiedOn());
-        response.setOrganizerName(event.getOrganizersName());
+//        response.setCreatedOn(event.getCreatedOn());
+//        response.setModifiedOn(event.getModifiedOn());
+        response.setOrganizerName(event.getOrganizerName());
         response.setOrganizerMobile(event.getOrganizerMobile());
         return response;
     }

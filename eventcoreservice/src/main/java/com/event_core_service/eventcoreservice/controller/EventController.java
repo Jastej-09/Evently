@@ -1,7 +1,7 @@
 package com.event_core_service.eventcoreservice.controller;
 
 import com.event_core_service.eventcoreservice.Response.ResponseEnvelope;
-import com.event_core_service.eventcoreservice.dto.request.CreateEventRequest;
+import com.event_core_service.eventcoreservice.dto.request.CreateEventRequestDTO;
 import com.event_core_service.eventcoreservice.dto.response.ResponseDTO;
 import com.event_core_service.eventcoreservice.dto.response.StatsResponseDTO;
 import com.event_core_service.eventcoreservice.dto.response.StatusResponseDTO;
@@ -22,35 +22,35 @@ public class EventController {
     }
 
     @GetMapping("/v1/events/{id}")
-     public ResponseEnvelope<ResponseDTO> getEvent(@PathVariable UUID id){
+     public ResponseDTO getEvent(@PathVariable UUID id){
         return eventService.getEvent(id);
     }
     @PostMapping("/v1/events")
-    public ResponseEnvelope<ResponseDTO> createEvent(@RequestBody CreateEventRequest evt){
+    public ResponseDTO createEvent(@RequestBody CreateEventRequestDTO evt){
         return eventService.createEvent(evt);
     }
     @PatchMapping("/v1/events/{id}/status")
-    public ResponseEnvelope<StatusResponseDTO> updateStatus(
+    public ResponseDTO updateStatus(
             @PathVariable UUID id,
             @RequestParam EventStatus status) {
 
         return eventService.updateEventStatus(id, status);
 
     }
-    @GetMapping("/v1/events/stats")
-    public ResponseEnvelope<StatsResponseDTO> getStats(){
-        return eventService.getStats();
-    }
-
-    @GetMapping("/v1/events")
-    public ResponseEnvelope<Page<ResponseDTO>> getFilteredResult(
-            @RequestParam (required = false) String city,
-            @RequestParam (required = false) EventCategory category,
-            @RequestParam (required = false) EventStatus status,
-            @RequestParam (defaultValue = "0") int page,
-            @RequestParam (defaultValue = "10") int size
-    ){
-        return eventService.getFilteredResult(city,category,status,page,size);
-    }
+//    @GetMapping("/v1/events/stats")
+//    public StatsResponseDTO getStats(){
+//        return eventService.getStats();
+//    }
+//
+//    @GetMapping("/v1/events")
+//    public ResponseDTO getFilteredResult(
+//            @RequestParam (required = false) String city,
+//            @RequestParam (required = false) EventCategory category,
+//            @RequestParam (required = false) EventStatus status,
+//            @RequestParam (defaultValue = "0") int page,
+//            @RequestParam (defaultValue = "10") int size
+//    ){
+//        return eventService.getFilteredResult(city,category,status,page,size);
+//    }
 
 }

@@ -14,4 +14,7 @@ import lombok.Setter;
 public class EventStatusCountDTO {
     private EventStatus eventStatus;
     private Long count;
+
+    public EventStatus getEventStatus() { return eventStatus; }
+    public Long getCount() { return count; }
 }
