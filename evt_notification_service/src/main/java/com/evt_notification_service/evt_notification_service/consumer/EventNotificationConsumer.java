@@ -6,6 +6,7 @@ import com.evt_notification_service.evt_notification_service.service.DashboardSe
 import com.evt_notification_service.evt_notification_service.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
@@ -19,11 +20,21 @@ public class EventNotificationConsumer {
             groupId = "notification-service")
 
     public void consume(KafkaMessage kafkaMessage, Acknowledgment acknowledgment) {
-        log.info("Event message received: {}", kafkaMessage);
-        EventSnapshot snapshot = kafkaMessage.payload();
-        eventNotificationService.processEvent(kafkaMessage);
-        dashboardService.updateDashboard(kafkaMessage);
-        acknowledgment.acknowledge();
+        try {
+            MDC.put(
+                    "traceId",
+                    kafkaMessage.traceId()
+            );
+            log.info("Event message received: {}", kafkaMessage);
+            EventSnapshot snapshot = kafkaMessage.payload();
+            boolean processed = eventNotificationService.processEvent(kafkaMessage);
+            if (processed) {
+                dashboardService.updateDashboard(kafkaMessage);
+            }
+            acknowledgment.acknowledge();
+        }finally {
+
+        }
     }
 
 }

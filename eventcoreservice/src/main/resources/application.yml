@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/evently
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/evently}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
 #    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -20,3 +20,6 @@ grpc:
   server:
     port: 9090
 
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [traceId=%X{traceId}] [%thread] %logger{36} - %msg%n"

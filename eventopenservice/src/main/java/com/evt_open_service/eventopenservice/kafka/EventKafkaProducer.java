@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-
+import org.slf4j.MDC;
 @Component
 @RequiredArgsConstructor
 public class EventKafkaProducer {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
+
     private static final Logger log =
             LoggerFactory.getLogger(kafkaEventProducerService.class);
 
@@ -25,7 +26,6 @@ public class EventKafkaProducer {
                 "Publishing Kafka message eventId={} eventType={} topic={}",
                 eventId,
                 message.eventType(),
-
                 topic
         );
         System.out.println();

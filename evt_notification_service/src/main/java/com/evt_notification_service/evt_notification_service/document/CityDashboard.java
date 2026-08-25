@@ -12,9 +12,14 @@ import java.util.Map;
 @Document(collection = "city_dashboards")
     public class CityDashboard {
 
+        @Id
         String city;     // note: city IS the document id, not a generated one
         long totalEvents;
         long publishedEvents;
         Map<String, Long> eventsByCategory;
         Instant lastUpdatedAt;
+
+        public String getId() {
+            return city;
+        }
     }

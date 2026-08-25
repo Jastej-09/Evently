@@ -55,18 +55,18 @@ public class EventClientService {
         return event;
     }
 
-//    public PageResponse<ResponseDTO> getFilteredResult(String city,
-//                                                        com.evt_open_service.eventopenservice.enums.EventCategory category,
-//                                                        com.evt_open_service.eventopenservice.enums.EventStatus status,
-//                                                        int page, int size) {
-//        ListEventsRequest.Builder request = ListEventsRequest.newBuilder().setPage(page).setSize(size);
-//        if (city != null) request.setCity(city);
-//        if (category != null) request.setCategory(EventEnumMapper.toProtoCategory(category));
-//        if (status != null) request.setStatus(EventEnumMapper.toProtoStatus(status));
-//        return mapper.toPageResponse(eventGrpcClient.listEvents(request.build()));
-//    }
-//
-//    public StatsResponseDTO getStats() {
-//        return mapper.toStatsResponse(eventGrpcClient.getEventStats(GetEventStatsRequest.newBuilder().build()));
-//    }
+    public PageResponse<ResponseDTO> getFilteredResult(String city,
+                                                        com.evt_open_service.eventopenservice.enums.EventCategory category,
+                                                        com.evt_open_service.eventopenservice.enums.EventStatus status,
+                                                        int page, int size) {
+        ListEventsRequest.Builder request = ListEventsRequest.newBuilder().setPage(page).setSize(size);
+        if (city != null) request.setCity(city);
+        if (category != null) request.setCategory(EventEnumMapper.toProtoCategory(category));
+        if (status != null) request.setStatus(EventEnumMapper.toProtoStatus(status));
+        return mapper.toPageResponse(eventGrpcClient.listEvents(request.build()));
+    }
+
+    public StatsResponseDTO getStats() {
+        return mapper.toStatsResponseDTO(eventGrpcClient.getEventStats(GetEventStatsRequest.newBuilder().build()));
+    }
 }

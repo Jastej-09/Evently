@@ -110,62 +110,91 @@ services:
   # Microservices
   # =========================
 
-#  event-core-service:
-#    build:
-#      context: .
-#      dockerfile: eventcoreservice/Dockerfile
-#    container_name: event-core-service
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      kafka:
-#        condition: service_started
-#      redis:
-#        condition: service_healthy
-#    networks:
-#      - evt-network
+  event-core-service:
+    build:
+      context: eventcoreservice
+      dockerfile: dockerfile
+    container_name: event-core-service
+    ports:
+      - "8082:8082"
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/evently
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - evt-network
 
 
-#  event-open-service:
-#    build:
-#      context: .
-#      dockerfile: eventopenservice/Dockerfile
-#    container_name: event-open-service
-#    depends_on:
-#      event-core-service:
-#        condition: service_started
-#    networks:
-#      - evt-network
+  event-open-service:
+    build:
+      context: eventopenservice
+      dockerfile: dockerfile
+    container_name: event-open-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      GRPC_HOST: event-core-service
+      GRPC_PORT: 9090
+    depends_on:
+      event-core-service:
+        condition: service_started
+      kafka:
+        condition: service_started
+    networks:
+      - evt-network
 
 
-#  notification-service:
-#    build:
-#      context: .
-#      dockerfile: evt_notification_service/Dockerfile
-#    container_name: notification-service
-#    depends_on:
-#      mongo:
-#        condition: service_healthy
-#      kafka:
-#        condition: service_started
-#    networks:
-#      - evt-network
+  notification-service:
+    build:
+      context: evt_notification_service
+      dockerfile: dockerfile
+    container_name: evt-notification-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/event_notification_db
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      mongo:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    networks:
+      - evt-network
 
 
-#  bff:
-#    build:
-#      context: .
-#      dockerfile: evtbff/Dockerfile
-#    container_name: evt-bff
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      event-open-service:
-#        condition: service_started
-#      notification-service:
-#        condition: service_started
-#    networks:
-#      - evt-network
+  bff:
+    build:
+      context: evtbff
+      dockerfile: dockerfile
+    container_name: evt-bff
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/evently
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      EVT_OPEN_SERVICE_URL: http://event-open-service:8081
+      EVT_NOTIFICATION_SERVICE_URL: http://evt-notification-service:8083
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      event-open-service:
+        condition: service_started
+      notification-service:
+        condition: service_started
+    networks:
+      - evt-network
 
 
 # =========================

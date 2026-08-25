@@ -83,7 +83,7 @@ public class DashboardService {
                 );
 
         return new CityDashboardResponse(
-                dashboard.getCity(),
+                dashboard.getId(),
                 dashboard.getTotalEvents(),
                 dashboard.getEventsByCategory()
         );

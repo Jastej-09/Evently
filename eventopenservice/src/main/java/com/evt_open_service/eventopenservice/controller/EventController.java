@@ -34,18 +34,18 @@ public class EventController {
         return eventService.updateEventStatus(id, status);
     }
 
-//    @GetMapping
-//    public PageResponse<ResponseDTO> getFilteredResult(
-//            @RequestParam(required = false) String city,
-//            @RequestParam(required = false) EventCategory category,
-//            @RequestParam(required = false) EventStatus status,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size) {
-//        return  eventService.getFilteredResult(city, category, status, page, size);
-//    }
+    @GetMapping
+    public PageResponse<ResponseDTO> getFilteredResult(
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) EventCategory category,
+            @RequestParam(required = false) EventStatus status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return  eventService.getFilteredResult(city, category, status, page, size);
+    }
 
-//    @GetMapping("/stats")
-//    public StatsResponseDTO getStats() {
-//        return eventService.getStats();
-//    }
+    @GetMapping("/stats")
+    public StatsResponseDTO getStats() {
+        return eventService.getStats();
+    }
 }

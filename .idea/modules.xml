@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/evently.iml" filepath="$PROJECT_DIR$/evently.iml" />
-      <module fileurl="file://$PROJECT_DIR$/evt_grpc_contracts.iml" filepath="$PROJECT_DIR$/evt_grpc_contracts.iml" />
     </modules>
   </component>
 </project>

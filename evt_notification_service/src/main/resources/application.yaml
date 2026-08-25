@@ -11,7 +11,7 @@ spring:
   # =========================
   data:
     mongodb:
-      uri: mongodb://localhost:27017/event_notification_db
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/event_notification_db}
       uuid-representation: standard
 
 
@@ -20,7 +20,7 @@ spring:
   # =========================
   kafka:
 
-    bootstrap-servers: localhost:29092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
 
     consumer:
 
@@ -51,3 +51,7 @@ spring:
     listener:
 
       ack-mode: manual
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level [traceId=%X{traceId}] [%thread] %logger{36} - %msg%n"

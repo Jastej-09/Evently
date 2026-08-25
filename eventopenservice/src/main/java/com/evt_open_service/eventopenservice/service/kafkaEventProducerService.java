@@ -1,15 +1,23 @@
 package com.evt_open_service.eventopenservice.service;
+
 import lombok.RequiredArgsConstructor;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import com.evt_open_service.eventopenservice.kafka.*;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class kafkaEventProducerService {
 
     private final EventKafkaProducer eventKafkaProducer;
+
+    private String resolveTraceId() {
+        String traceId = MDC.get("traceId");
+        return (traceId != null) ? traceId : UUID.randomUUID().toString();
+    }
 
     public void publishEventPublished(
             String eventId,
@@ -28,6 +36,7 @@ public class kafkaEventProducerService {
                 eventId,
                 EventType.EVENT_PUBLISHED,
                 Instant.now(),
+                resolveTraceId(),
                 snapshot
         );
 
@@ -55,6 +64,7 @@ public class kafkaEventProducerService {
                 eventId,
                 EventType.EVENT_STATUS_CHANGED,
                 Instant.now(),
+                resolveTraceId(),
                 snapshot
         );
 

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @FeignClient(
         name = "event-notification-service",
-        url = "http://localhost:8083"
+        url = "${evt.notification-service.url:http://localhost:8083}"
 )
 public interface NotificationClient {
 

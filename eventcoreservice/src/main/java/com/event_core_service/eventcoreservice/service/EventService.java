@@ -113,9 +113,26 @@ public class EventService {
 
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<Event> events = eventRepository.findByCityAndCategoryAndStatus(
-                city, category, status, pageable
-        );
+        Page<Event> events;
+
+        if (city != null && category != null && status != null) {
+            events = eventRepository.findByCityAndCategoryAndStatus(city, category, status, pageable);
+        } else if (city != null && category != null) {
+            events = eventRepository.findByCityAndCategory(city, category, pageable);
+        } else if (city != null && status != null) {
+            events = eventRepository.findByCityAndStatus(city, status, pageable);
+        } else if (category != null && status != null) {
+            events = eventRepository.findByCategoryAndStatus(category, status, pageable);
+        } else if (city != null) {
+            events = eventRepository.findByCity(city, pageable);
+        } else if (category != null) {
+            events = eventRepository.findByCategory(category, pageable);
+        } else if (status != null) {
+            events = eventRepository.findByStatus(status, pageable);
+        } else {
+            events = eventRepository.findAll(pageable);
+        }
+
         Page<ResponseDTO> response = events.map(
                 event -> responseMapper.ResponseMapper(event)
         );

@@ -19,7 +19,7 @@ public class NotificationService {
 
     private final EventNotificationRepository eventNotificationRepository;
 
-    public void processEvent(KafkaMessage message) {
+    public boolean processEvent(KafkaMessage message) {
         System.out.println("ProcessEvent Received");
         String eventId =message.eventId();
 
@@ -30,7 +30,7 @@ public class NotificationService {
                     eventId
             );
 
-            return;
+            return false;
         }
 
         EventSnapshot snapshot = message.payload();
@@ -51,6 +51,7 @@ public class NotificationService {
                 "Notification created successfully for eventId={}",
                 eventId
         );
+        return true;
     }
     public EventNotificationResponse getNotification(String eventId) {
 
