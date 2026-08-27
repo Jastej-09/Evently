@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/evently.iml" filepath="$PROJECT_DIR$/evently.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eventcoreservice/eventcoreservice.iml" filepath="$PROJECT_DIR$/eventcoreservice/eventcoreservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eventopenservice/eventopenservice.iml" filepath="$PROJECT_DIR$/eventopenservice/eventopenservice.iml" />
     </modules>
   </component>
 </project>

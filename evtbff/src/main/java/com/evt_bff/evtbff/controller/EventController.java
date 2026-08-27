@@ -10,6 +10,7 @@ import com.evt_bff.evtbff.dto.response.StatsResponseDTO;
 import com.evt_bff.evtbff.enums.EventCategory;
 import com.evt_bff.evtbff.enums.EventStatus;
 import com.evt_bff.evtbff.responseenvelope.ResponseEnvelope;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class EventController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("api/v1/events")
-    public ResponseEnvelope<ResponseDTO> createEvent(@RequestBody CreateEventRequestDTO evt) {
+    public ResponseEnvelope<ResponseDTO> createEvent(@Valid @RequestBody CreateEventRequestDTO evt) {
         ResponseDTO responseDTO = eventClient.createEvent(evt);
         return new ResponseEnvelope<>(true, "Event created", responseDTO);
     }

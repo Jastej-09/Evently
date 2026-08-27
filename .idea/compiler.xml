@@ -22,9 +22,6 @@
         <module name="demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="evt_notification_service" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -33,7 +30,6 @@
       <module name="evently" options="-parameters" />
       <module name="eventopenservice" options="-parameters" />
       <module name="evt_grpc_contracts" options="-parameters" />
-      <module name="evt_notification_service" options="-parameters" />
       <module name="evtbff" options="-parameters" />
     </option>
   </component>

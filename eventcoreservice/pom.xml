@@ -10,7 +10,7 @@
 		<groupId>evently</groupId>
 		<artifactId>evently</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<relativePath></relativePath>
 	</parent>
 
 	<groupId>com.event_core_service</groupId>
@@ -38,7 +38,7 @@
 		<!-- REST/Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -77,16 +77,10 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Tests -->
+		<!-- Tests: JUnit 5, Mockito, AssertJ, MockMvc, @DataJpaTest support -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 

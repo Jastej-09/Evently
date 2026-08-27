@@ -47,4 +47,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseEnvelope<>(false, "An unexpected error occurred", null));
     }
+    @ExceptionHandler(feign.FeignException.NotFound.class)
+    public ResponseEntity<ResponseEnvelope<Void>> handleNotFound(
+            feign.FeignException.NotFound ex
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        new ResponseEnvelope<>(
+                                false,
+                                "Event not found",
+                                null
+                        )
+                );
+    }
 }
